@@ -1,0 +1,73 @@
+[project]
+name = "mcp-data-gw"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Sascha Tölkes", email = "code@stoelkes.de" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=2.0.0",
+    "python-dotenv>=1.2.2",
+    "pydantic>=2.1.0,<3.0.0",
+    "sqlalchemy>=2.0.0,<3.0.0"
+]
+
+[project.scripts]
+mcp-data-gw = "mcp_data_gw:main"
+
+[build-system]
+requires = ["uv_build>=0.13.4,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+exclude-newer = "7 days"
+no-build = true
+preview-features = ["malware-check"]
+
+[tool.uv.audit]
+malware-check = true
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.3",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E4",   # Import and syntax-related pycodestyle errors
+    "E7",   # Statement errors
+    "E9",   # Runtime-related syntax errors
+    "F",    # Pyflakes
+    "I",    # Import sorting
+    "B",    # Bugbear
+    "UP",   # Python modernization
+    "SIM",  # Simplification
+    "RUF",  # Ruff-specific rules
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest]
+minversion = "9.0"
+testpaths = ["tests"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--import-mode=importlib",
+]
+xfail_strict = true
+
+markers = [
+    "unit: Unit tests without external dependencies",
+    "integration: Integration tests involving external components",
+]
