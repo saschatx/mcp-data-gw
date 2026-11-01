@@ -24,6 +24,7 @@ build-backend = "uv_build"
 [tool.uv]
 exclude-newer = "7 days"
 no-build = true
+no-binary-package = ["mcp-data-gw"]
 preview-features = ["malware-check"]
 
 [tool.uv.audit]

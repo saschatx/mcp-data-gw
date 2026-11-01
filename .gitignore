@@ -46,3 +46,10 @@ Thumbs.db
 
 # Local development
 docker-compose.override.yml
+
+# Ignore data in data directory
+data/*
+!data/.gitkeep
+
+# Ignore logs directory
+logs/
